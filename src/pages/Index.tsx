@@ -1,12 +1,16 @@
+import { useState } from "react";
 import CampaignHeader from "@/components/CampaignHeader";
 import CampaignContent from "@/components/CampaignContent";
 import DonationSidebar from "@/components/DonationSidebar";
+import DonationModal from "@/components/DonationModal";
 
 const Index = () => {
+  const [donationOpen, setDonationOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <CampaignHeader />
-      <main className="container max-w-6xl mx-auto px-4 py-8">
+      <main className="container max-w-6xl mx-auto px-4 py-8 pb-32 lg:pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8">
           <CampaignContent />
           <aside className="hidden lg:block">
@@ -23,11 +27,16 @@ const Index = () => {
             </div>
             <p className="text-xs text-muted-foreground">186 apoiadores</p>
           </div>
-          <button className="w-full h-12 rounded-full bg-primary text-primary-foreground font-bold text-base">
+          <button
+            onClick={() => setDonationOpen(true)}
+            className="w-full h-12 rounded-full bg-primary text-primary-foreground font-bold text-base"
+          >
             Quero Ajudar
           </button>
         </div>
       </main>
+
+      <DonationModal open={donationOpen} onOpenChange={setDonationOpen} />
     </div>
   );
 };
